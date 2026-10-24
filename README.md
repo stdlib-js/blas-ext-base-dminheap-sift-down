@@ -35,32 +35,38 @@ limitations under the License.
 
 > Sift a value down from a specified index in a double-precision floating-point strided min-heap until the heap property is restored.
 
-<section class="installation">
 
-## Installation
-
-```bash
-npm install @stdlib/blas-ext-base-dminheap-sift-down
-```
-
-Alternatively,
-
--   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
--   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
--   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
-
-The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
-
-To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
-
-</section>
 
 <section class="usage">
 
 ## Usage
 
+To use in Observable,
+
 ```javascript
-var dminheapSiftDown = require( '@stdlib/blas-ext-base-dminheap-sift-down' );
+dminheapSiftDown = require( 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dminheap-sift-down@umd/browser.js' )
+```
+
+To vendor stdlib functionality and avoid installing dependency trees for Node.js, you can use the UMD server build:
+
+```javascript
+var dminheapSiftDown = require( 'path/to/vendor/umd/blas-ext-base-dminheap-sift-down/index.js' )
+```
+
+To include the bundle in a webpage,
+
+```html
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dminheap-sift-down@umd/browser.js"></script>
+```
+
+If no recognized module system is present, access bundle contents via the global scope:
+
+```html
+<script type="text/javascript">
+(function () {
+    window.dminheapSiftDown;
+})();
+</script>
 ```
 
 #### dminheapSiftDown( N, index, value, x, strideX )
@@ -161,9 +167,14 @@ dminheapSiftDown.ndarray( 5, 0, 7.0, x, 1, 1 );
 
 <!-- eslint no-undef: "error" -->
 
-```javascript
-var Float64Array = require( '@stdlib/array-float64' );
-var dminheapSiftDown = require( '@stdlib/blas-ext-base-dminheap-sift-down' );
+```html
+<!DOCTYPE html>
+<html lang="en">
+<body>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@umd/browser.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dminheap-sift-down@umd/browser.js"></script>
+<script type="text/javascript">
+(function () {
 
 // Define a min-heap whose root violates the min-heap invariant:
 var x = new Float64Array( [ 7.0, 2.0, 3.0, 4.0, 5.0 ] );
@@ -172,6 +183,11 @@ console.log( x );
 // Sift the root value down toward the leaves in order to restore the min-heap property:
 dminheapSiftDown( x.length, 0, x[ 0 ], x, 1 );
 console.log( x );
+
+})();
+</script>
+</body>
+</html>
 ```
 
 </section>
@@ -180,128 +196,7 @@ console.log( x );
 
 <!-- C interface documentation. -->
 
-* * *
 
-<section class="c">
-
-## C APIs
-
-<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
-
-<section class="intro">
-
-</section>
-
-<!-- /.intro -->
-
-<!-- C usage documentation. -->
-
-<section class="usage">
-
-### Usage
-
-```c
-#include "stdlib/blas/ext/base/dminheap_sift_down.h"
-```
-
-#### stdlib_strided_dminheap_sift_down( N, index, value, \*X, strideX )
-
-Sifts a value down from a specified index in a double-precision floating-point strided min-heap until the heap property is restored.
-
-```c
-double x[] = { 1.0, 2.0, 3.0, 4.0, 5.0 };
-
-stdlib_strided_dminheap_sift_down( 5, 0, 7.0, x, 1 );
-```
-
-The function accepts the following arguments:
-
--   **N**: `[in] CBLAS_INT` number of indexed elements.
--   **index**: `[in] CBLAS_INT` logical index at which to begin sifting.
--   **value**: `[in] double` value to place into the heap.
--   **X**: `[inout] double*` heap storage array.
--   **strideX**: `[in] CBLAS_INT` stride length.
-
-```c
-void stdlib_strided_dminheap_sift_down( const CBLAS_INT N, const CBLAS_INT index, const double value, double *X, const CBLAS_INT strideX );
-```
-
-<!-- lint disable maximum-heading-length -->
-
-#### stdlib_strided_dminheap_sift_down_ndarray( N, index, value, \*X, strideX, offsetX )
-
-<!-- lint enable maximum-heading-length -->
-
-Sifts a value down from a specified index in a double-precision floating-point strided min-heap until the heap property is restored using alternative indexing semantics.
-
-```c
-double x[] = { 1.0, 2.0, 3.0, 4.0, 5.0 };
-
-stdlib_strided_dminheap_sift_down_ndarray( 5, 0, 7.0, x, 1, 0 );
-```
-
-The function accepts the following arguments:
-
--   **N**: `[in] CBLAS_INT` number of indexed elements.
--   **index**: `[in] CBLAS_INT` logical index at which to begin sifting.
--   **value**: `[in] double` value to place into the heap.
--   **X**: `[inout] double*` heap storage array.
--   **strideX**: `[in] CBLAS_INT` stride length.
--   **offsetX**: `[in] CBLAS_INT` starting index.
-
-```c
-void stdlib_strided_dminheap_sift_down_ndarray( const CBLAS_INT N, const CBLAS_INT index, const double value, double *X, const CBLAS_INT strideX, const CBLAS_INT offsetX );
-```
-
-</section>
-
-<!-- /.usage -->
-
-<!-- C API usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
-
-<section class="notes">
-
-</section>
-
-<!-- /.notes -->
-
-<!-- C API usage examples. -->
-
-<section class="examples">
-
-### Examples
-
-```c
-#include "stdlib/blas/ext/base/dminheap_sift_down.h"
-#include <stdio.h>
-
-int main( void ) {
-    // Create a strided array representing a min-heap whose root violates the min-heap invariant:
-    double x[] = { 7.0, 2.0, 3.0, 4.0, 5.0 };
-
-    // Specify the number of indexed elements:
-    const int N = 5;
-
-    // Specify a stride:
-    const int strideX = 1;
-
-    // Sift the root value down toward the leaves in order to restore the min-heap property:
-    stdlib_strided_dminheap_sift_down( N, 0, x[ 0 ], x, strideX );
-
-    // Print the result:
-    for ( int i = 0; i < 5; i++ ) {
-        printf( "x[ %i ] = %lf\n", i, x[ i ] );
-    }
-}
-```
-
-</section>
-
-<!-- /.examples -->
-
-</section>
-
-<!-- /.c -->
 
 <!-- Section for related `stdlib` packages. Do not manually edit this section, as it is automatically populated. -->
 
@@ -383,7 +278,7 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/blas-ext-base-dminheap-sift-down/main/LICENSE
 
-[@stdlib/array/float64]: https://github.com/stdlib-js/array-float64
+[@stdlib/array/float64]: https://github.com/stdlib-js/array-float64/tree/umd
 
 [mdn-typed-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
