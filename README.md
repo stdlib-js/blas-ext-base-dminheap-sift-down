@@ -35,32 +35,14 @@ limitations under the License.
 
 > Sift a value down from a specified index in a double-precision floating-point strided min-heap until the heap property is restored.
 
-<section class="installation">
 
-## Installation
-
-```bash
-npm install @stdlib/blas-ext-base-dminheap-sift-down
-```
-
-Alternatively,
-
--   To load the package in a website via a `script` tag without installation and bundlers, use the [ES Module][es-module] available on the [`esm`][esm-url] branch (see [README][esm-readme]).
--   If you are using Deno, visit the [`deno`][deno-url] branch (see [README][deno-readme] for usage intructions).
--   For use in Observable, or in browser/node environments, use the [Universal Module Definition (UMD)][umd] build available on the [`umd`][umd-url] branch (see [README][umd-readme]).
-
-The [branches.md][branches-url] file summarizes the available branches and displays a diagram illustrating their relationships.
-
-To view installation and usage instructions specific to each branch build, be sure to explicitly navigate to the respective README files on each branch, as linked to above.
-
-</section>
 
 <section class="usage">
 
 ## Usage
 
 ```javascript
-var dminheapSiftDown = require( '@stdlib/blas-ext-base-dminheap-sift-down' );
+import dminheapSiftDown from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dminheap-sift-down@deno/mod.js';
 ```
 
 #### dminheapSiftDown( N, index, value, x, strideX )
@@ -68,7 +50,7 @@ var dminheapSiftDown = require( '@stdlib/blas-ext-base-dminheap-sift-down' );
 Sifts a value down from a specified index in a double-precision floating-point strided min-heap until the heap property is restored.
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 var x = new Float64Array( [ 1.0, 2.0, 3.0, 4.0, 5.0 ] );
 
@@ -87,7 +69,7 @@ The function has the following parameters:
 The `N` and stride parameters determine which elements in the strided array are accessed at runtime. For example, to sift a value down a heap occupying every other element:
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 var x = new Float64Array( [ 1.0, 0.0, 2.0, 0.0, 3.0 ] );
 
@@ -98,7 +80,7 @@ dminheapSiftDown( 3, 0, 7.0, x, 2 );
 Note that indexing is relative to the first index. To introduce an offset, use [`typed array`][mdn-typed-array] views.
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 // Initial array...
 var x0 = new Float64Array( [ 0.0, 1.0, 2.0, 3.0, 4.0, 5.0 ] );
@@ -115,7 +97,7 @@ dminheapSiftDown( 5, 0, 7.0, x1, 1 );
 Sifts a value down from a specified index in a double-precision floating-point strided min-heap until the heap property is restored using alternative indexing semantics.
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 var x = new Float64Array( [ 1.0, 2.0, 3.0, 4.0, 5.0 ] );
 
@@ -130,7 +112,7 @@ The function has the following additional parameters:
 While [`typed array`][mdn-typed-array] views mandate a view offset based on the underlying buffer, the offset parameter supports indexing semantics based on a starting index. For example, to sift a value down a heap occupying the last five elements:
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
 
 var x = new Float64Array( [ 0.0, 1.0, 2.0, 3.0, 4.0, 5.0 ] );
 
@@ -162,8 +144,8 @@ dminheapSiftDown.ndarray( 5, 0, 7.0, x, 1, 1 );
 <!-- eslint no-undef: "error" -->
 
 ```javascript
-var Float64Array = require( '@stdlib/array-float64' );
-var dminheapSiftDown = require( '@stdlib/blas-ext-base-dminheap-sift-down' );
+import Float64Array from 'https://cdn.jsdelivr.net/gh/stdlib-js/array-float64@deno/mod.js';
+import dminheapSiftDown from 'https://cdn.jsdelivr.net/gh/stdlib-js/blas-ext-base-dminheap-sift-down@deno/mod.js';
 
 // Define a min-heap whose root violates the min-heap invariant:
 var x = new Float64Array( [ 7.0, 2.0, 3.0, 4.0, 5.0 ] );
@@ -180,128 +162,7 @@ console.log( x );
 
 <!-- C interface documentation. -->
 
-* * *
 
-<section class="c">
-
-## C APIs
-
-<!-- Section to include introductory text. Make sure to keep an empty line after the intro `section` element and another before the `/section` close. -->
-
-<section class="intro">
-
-</section>
-
-<!-- /.intro -->
-
-<!-- C usage documentation. -->
-
-<section class="usage">
-
-### Usage
-
-```c
-#include "stdlib/blas/ext/base/dminheap_sift_down.h"
-```
-
-#### stdlib_strided_dminheap_sift_down( N, index, value, \*X, strideX )
-
-Sifts a value down from a specified index in a double-precision floating-point strided min-heap until the heap property is restored.
-
-```c
-double x[] = { 1.0, 2.0, 3.0, 4.0, 5.0 };
-
-stdlib_strided_dminheap_sift_down( 5, 0, 7.0, x, 1 );
-```
-
-The function accepts the following arguments:
-
--   **N**: `[in] CBLAS_INT` number of indexed elements.
--   **index**: `[in] CBLAS_INT` logical index at which to begin sifting.
--   **value**: `[in] double` value to place into the heap.
--   **X**: `[inout] double*` heap storage array.
--   **strideX**: `[in] CBLAS_INT` stride length.
-
-```c
-void stdlib_strided_dminheap_sift_down( const CBLAS_INT N, const CBLAS_INT index, const double value, double *X, const CBLAS_INT strideX );
-```
-
-<!-- lint disable maximum-heading-length -->
-
-#### stdlib_strided_dminheap_sift_down_ndarray( N, index, value, \*X, strideX, offsetX )
-
-<!-- lint enable maximum-heading-length -->
-
-Sifts a value down from a specified index in a double-precision floating-point strided min-heap until the heap property is restored using alternative indexing semantics.
-
-```c
-double x[] = { 1.0, 2.0, 3.0, 4.0, 5.0 };
-
-stdlib_strided_dminheap_sift_down_ndarray( 5, 0, 7.0, x, 1, 0 );
-```
-
-The function accepts the following arguments:
-
--   **N**: `[in] CBLAS_INT` number of indexed elements.
--   **index**: `[in] CBLAS_INT` logical index at which to begin sifting.
--   **value**: `[in] double` value to place into the heap.
--   **X**: `[inout] double*` heap storage array.
--   **strideX**: `[in] CBLAS_INT` stride length.
--   **offsetX**: `[in] CBLAS_INT` starting index.
-
-```c
-void stdlib_strided_dminheap_sift_down_ndarray( const CBLAS_INT N, const CBLAS_INT index, const double value, double *X, const CBLAS_INT strideX, const CBLAS_INT offsetX );
-```
-
-</section>
-
-<!-- /.usage -->
-
-<!-- C API usage notes. Make sure to keep an empty line after the `section` element and another before the `/section` close. -->
-
-<section class="notes">
-
-</section>
-
-<!-- /.notes -->
-
-<!-- C API usage examples. -->
-
-<section class="examples">
-
-### Examples
-
-```c
-#include "stdlib/blas/ext/base/dminheap_sift_down.h"
-#include <stdio.h>
-
-int main( void ) {
-    // Create a strided array representing a min-heap whose root violates the min-heap invariant:
-    double x[] = { 7.0, 2.0, 3.0, 4.0, 5.0 };
-
-    // Specify the number of indexed elements:
-    const int N = 5;
-
-    // Specify a stride:
-    const int strideX = 1;
-
-    // Sift the root value down toward the leaves in order to restore the min-heap property:
-    stdlib_strided_dminheap_sift_down( N, 0, x[ 0 ], x, strideX );
-
-    // Print the result:
-    for ( int i = 0; i < 5; i++ ) {
-        printf( "x[ %i ] = %lf\n", i, x[ i ] );
-    }
-}
-```
-
-</section>
-
-<!-- /.examples -->
-
-</section>
-
-<!-- /.c -->
 
 <!-- Section for related `stdlib` packages. Do not manually edit this section, as it is automatically populated. -->
 
@@ -320,7 +181,7 @@ int main( void ) {
 
 ## Notice
 
-This package is part of [stdlib][stdlib], a standard library for JavaScript and Node.js, with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
+This package is part of [stdlib][stdlib], a standard library with an emphasis on numerical and scientific computing. The library provides a collection of robust, high performance libraries for mathematics, statistics, streams, utilities, and more.
 
 For more information on the project, filing bug reports and feature requests, and guidance on how to develop [stdlib][stdlib], see the main project [repository][stdlib].
 
@@ -383,7 +244,7 @@ Copyright &copy; 2016-2026. The Stdlib [Authors][stdlib-authors].
 
 [stdlib-license]: https://raw.githubusercontent.com/stdlib-js/blas-ext-base-dminheap-sift-down/main/LICENSE
 
-[@stdlib/array/float64]: https://github.com/stdlib-js/array-float64
+[@stdlib/array/float64]: https://github.com/stdlib-js/array-float64/tree/deno
 
 [mdn-typed-array]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypedArray
 
